@@ -6,6 +6,13 @@ import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -61,7 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setupMap(mMap);
 
         wherePlayerIs = getPlayersLocation();
-        mMap.addMarker(new MarkerOptions().position(wherePlayerIs).title("You are here").icon(BitmapDescriptorFactory.fromResource(R.drawable.youarehere)));
+        mMap.addMarker(new MarkerOptions().position(wherePlayerIs).title("This is you, $player").icon(BitmapDescriptorFactory.fromResource(R.drawable.youarehere)));
         mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(wherePlayerIs,17.5f) );
 
         drawMarkers();
@@ -130,7 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void drawMarkers(){
         wherePlayerIs = getPlayersLocation();
         //marker array to store markers for later access
-        generatedMarkers = new Marker[60];
+        generatedMarkers = new Marker[10];
         //create random markers around player
         for(int i=0;i<generatedMarkers.length;i++){
             Double randomLat = Math.random()*(.003)+.0001;
@@ -155,13 +162,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 generatedMarkers[i].setIcon(BitmapDescriptorFactory.fromResource(R.drawable.pokepinsmallgrey));
 
             }
-            if(distanceInMeters>250){
+            if(distanceInMeters>250) {
                 //circleSeeable radius
                 generatedMarkers[i].setIcon(BitmapDescriptorFactory.fromResource(R.drawable.empty));
             }
         }
-
-
     }
 
     //thanks https://stackoverflow.com/questions/639695/how-to-convert-latitude-or-longitude-to-meters
