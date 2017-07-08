@@ -187,7 +187,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public LatLng getPlayersLocation() {
-        LatLng wherePlayerIs = new LatLng(mLocation.getLatitude(),mLocation.getLongitude());
+        wherePlayerIs = new LatLng(mLocation.getLatitude(),mLocation.getLongitude());
         return wherePlayerIs;
     }
 }
